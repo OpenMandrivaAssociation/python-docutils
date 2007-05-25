@@ -4,7 +4,7 @@
 Name: 	 	%{name}
 Summary: 	Python Documentation Utilities
 Version: 	%{version}
-Release: 	%mkrel 2
+Release: 	%mkrel 3
 
 Source:		docutils-%{version}.tar.bz2
 URL:		http://docutils.sourceforge.net/
@@ -29,6 +29,11 @@ Several sources will be supported:
 %install
 rm -rf $RPM_BUILD_ROOT
 python setup.py install --root=$RPM_BUILD_ROOT
+for file in $RPM_BUILD_ROOT/%_bindir/*.py; do
+  mv $file $RPM_BUILD_ROOT/%_bindir/`basename $file .py`
+done
+# force installation of roman.py
+install -D -m 0644 extras/roman.py $RPM_BUILD_ROOT/%py_puresitedir/roman.py
 
 %clean
 rm -rf $RPM_BUILD_ROOT
