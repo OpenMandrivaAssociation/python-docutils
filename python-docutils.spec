@@ -12,7 +12,9 @@ License:	BSD
 Group:		Development/Python
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	python-devel
-BuildArch:     noarch
+BuildArch:	noarch
+Requires:	python      
+
 %description
 The purpose of the Docutils project is to create a set of tools for processing
 plaintext documentation into useful formats, such as HTML, XML, and TeX.
