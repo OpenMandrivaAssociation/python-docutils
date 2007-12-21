@@ -10,6 +10,7 @@ Source:		docutils-%{version}.tar.bz2
 URL:		http://docutils.sourceforge.net/
 License:	BSD
 Group:		Development/Python
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	python-devel
 BuildArch:	noarch
 Requires:	python      
