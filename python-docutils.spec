@@ -4,7 +4,7 @@
 Name: 	 	%{name}
 Summary: 	Python Documentation Utilities
 Version: 	%{version}
-Release: 	%mkrel 4
+Release: 	%mkrel 6
 
 Source:		docutils-%{version}.tar.bz2
 URL:		http://docutils.sourceforge.net/
