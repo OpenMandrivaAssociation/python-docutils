@@ -1,19 +1,20 @@
-%define name	python-docutils
-%define version 0.5
+%define module	docutils
+%define name	python-%{module}
+%define version	0.6
 
-Name: 	 	%{name}
-Summary: 	Python Documentation Utilities
-Version: 	%{version}
-Release: 	%mkrel 2
-
-Source:		docutils-%{version}.tar.lzma
+Name:		%{name}
+Summary:	Python Documentation Utilities
+Version:	%{version}
+Release:	%mkrel 1
+Source:		%{module}-%{version}.tar.gz
 URL:		http://docutils.sourceforge.net/
 License:	BSD
 Group:		Development/Python
 BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	python-devel, emacs
 BuildArch:	noarch
-Requires:	python      
+BuildRequires:	python-devel, emacs
+Requires:	python
+Suggests:	python-imaging
 
 %description
 The purpose of the Docutils project is to create a set of tools for
@@ -34,7 +35,7 @@ Support for the following sources is planned:
 * And others as discovered.
 
 %prep
-%setup -q -n docutils-%version
+%setup -q -n %{module}-%{version}
 
 %install
 %__rm -rf %{buildroot}
@@ -43,10 +44,10 @@ for file in %{buildroot}%_bindir/*.py; do
   mv $file %{buildroot}%_bindir/`basename $file .py`
 done
 
-# force installation of roman.py:
+# Force installation of roman.py:
 %__install -D -m 0644 extras/roman.py %{buildroot}/%py_puresitedir/roman.py
 
-# make emacs mode available:
+# Make emacs mode available:
 emacs -batch -f batch-byte-compile tools/editors/emacs/rst.el
 %__install -d -m 755 %{buildroot}%{_datadir}/emacs/site-lisp
 %__install -D -m 644 tools/editors/emacs/rst.el* %{buildroot}%{_datadir}/emacs/site-lisp
