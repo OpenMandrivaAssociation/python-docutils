@@ -1,12 +1,12 @@
 %define module	docutils
 %define name	python-%{module}
-%define version	0.6
+%define version	0.7
 
 Name:		%{name}
 Summary:	Python Documentation Utilities
 Version:	%{version}
 Release:	%mkrel 1
-Source:		%{module}-%{version}.tar.gz
+Source:		http://downloads.sourceforge.net/project/docutils/docutils/%{version}/%{module}-%{version}.tar.gz
 URL:		http://docutils.sourceforge.net/
 License:	BSD
 Group:		Development/Python
