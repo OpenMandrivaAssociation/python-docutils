@@ -1,6 +1,6 @@
 %define module	docutils
 %define name	python-%{module}
-%define version	0.8
+%define version	0.8.1
 
 Name:		%{name}
 Summary:	Python Documentation Utilities
