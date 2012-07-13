@@ -1,51 +1,43 @@
 %define module	docutils
 %define name	python-%{module}
-%define version	0.8.1
+%define version	0.9.1
+%define	rel		1
+%if %mdkversion < 201100
+%define	release %mkrel %{rel}
+%else
+%define	release	%{rel}
+%endif
 
 Name:		%{name}
 Summary:	Python Documentation Utilities
 Version:	%{version}
-Release:	%mkrel 1
+Release:	%{release}
 Source:		http://downloads.sourceforge.net/project/docutils/docutils/%{version}/%{module}-%{version}.tar.gz
 URL:		http://docutils.sourceforge.net/
 License:	BSD
 Group:		Development/Python
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildArch:	noarch
-BuildRequires:	python-devel, emacs
+BuildRequires:	python-devel, emacs, python-nose
 Requires:	python
-Suggests:	python-imaging
+Suggests:	python-imaging, python-pygments
 
 %description
-The purpose of the Docutils project is to create a set of tools for
-processing plaintext documentation into useful formats, such as HTML,
-XML, and LaTeX.  Support for the following sources has been implemented:
-
-* Standalone files.
-* PEPs (Python Enhancement Proposals)
-
-Support for the following sources is planned:
-
-* Inline documentation from Python modules and packages, extracted
-  with namespace context.
-* Email (RFC-822 headers, quoted excerpts, signatures, MIME parts).
-* Wikis, with global reference lookups of "wiki links".
-* Compound documents, such as multiple chapter files merged into a
-  book.
-* And others as discovered.
+Docutils is a modular system for processing documentation into useful formats,
+such as HTML, XML, and LaTeX. For input Docutils supports reStructuredText, an
+easy-to-read, what-you-see-is-what-you-get plaintext markup syntax.
 
 %prep
 %setup -q -n %{module}-%{version}
 
 %install
 %__rm -rf %{buildroot}
+
+# Rename executable scripts installed in /usr/bin:
 %__python setup.py install --root=%{buildroot}
 for file in %{buildroot}%_bindir/*.py; do
   mv $file %{buildroot}%_bindir/`basename $file .py`
 done
-
-# Force installation of roman.py:
-%__install -D -m 0644 extras/roman.py %{buildroot}/%py_puresitedir/roman.py
 
 # Make emacs mode available:
 emacs -batch -f batch-byte-compile tools/editors/emacs/rst.el
@@ -61,15 +53,16 @@ emacs -batch -f batch-byte-compile rst.el
 %__install -d -m 755 %{buildroot}%{_sysconfdir}/emacs/site-start.d
 %__install -m 644 rst.el* %{buildroot}%{_sysconfdir}/emacs/site-start.d/
 
+%check
+nosetests -q
+
 %clean
 %__rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc *.txt docs tools
-%py_puresitedir/docutils
-%py_puresitedir/roman*
-%py_puresitedir/*.egg-info
-%_bindir/*
+%doc *.txt docs/ licenses/
+%_bindir
+%py_puresitedir/docutils*
 %_datadir/emacs/site-lisp/*
 %_sysconfdir/emacs/site-start.d/*
