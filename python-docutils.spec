@@ -1,11 +1,11 @@
 %define module	docutils
 %define name	python-%{module}
-%define version	0.8
+%define version	0.10
 
 Name:		%{name}
 Summary:	Python Documentation Utilities
 Version:	%{version}
-Release:	%mkrel 2
+Release:	1
 Source:		http://downloads.sourceforge.net/project/docutils/docutils/%{version}/%{module}-%{version}.tar.gz
 URL:		http://docutils.sourceforge.net/
 License:	BSD
@@ -38,14 +38,10 @@ Support for the following sources is planned:
 %setup -q -n %{module}-%{version}
 
 %install
-%__rm -rf %{buildroot}
 %__python setup.py install --root=%{buildroot}
-for file in %{buildroot}%_bindir/*.py; do
-  mv $file %{buildroot}%_bindir/`basename $file .py`
+for file in %{buildroot}%{_bindir}/*.py; do
+  mv $file %{buildroot}%{_bindir}/`basename $file .py`
 done
-
-# Force installation of roman.py:
-%__install -D -m 0644 extras/roman.py %{buildroot}/%py_puresitedir/roman.py
 
 # Make emacs mode available:
 emacs -batch -f batch-byte-compile tools/editors/emacs/rst.el
@@ -65,10 +61,8 @@ emacs -batch -f batch-byte-compile rst.el
 %__rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc *.txt docs tools
 %py_puresitedir/docutils
-%py_puresitedir/roman*
 %py_puresitedir/*.egg-info
 %_bindir/*
 %_datadir/emacs/site-lisp/*
@@ -76,6 +70,9 @@ emacs -batch -f batch-byte-compile rst.el
 
 
 %changelog
+* Fri Feb  8 2013 pcpa <paulo.cesar.pereira.de.andrade@gmail.com> - 0.10-1
+- Update to 0.10.
+
 * Fri Jul 08 2011 Lev Givon <lev@mandriva.org> 0.8-1
 + Revision: 689352
 - Update to 0.8.
