@@ -4,13 +4,12 @@
 
 Name:		%{name}
 Summary:	Python Documentation Utilities
-Version:	%{version}
+Version:	0.11
 Release:	1
-Source:		http://downloads.sourceforge.net/project/docutils/docutils/%{version}/%{module}-%{version}.tar.gz
+Source:		http://downloads.sourceforge.net/project/docutils/docutils/0.11/docutils-%{version}.tar.gz
 URL:		http://docutils.sourceforge.net/
 License:	BSD
 Group:		Development/Python
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildArch:	noarch
 BuildRequires:	python-devel, emacs
 Requires:	python
@@ -58,7 +57,6 @@ emacs -batch -f batch-byte-compile rst.el
 %__install -m 644 rst.el* %{buildroot}%{_sysconfdir}/emacs/site-start.d/
 
 %clean
-%__rm -rf %{buildroot}
 
 %files
 %doc *.txt docs tools
@@ -147,4 +145,5 @@ emacs -batch -f batch-byte-compile rst.el
 
 * Sun Dec 05 2004 Michael Scherer <misc@mandrake.org> 0.3-2mdk
 - Rebuild for new python
+
 
