@@ -4,7 +4,7 @@
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
 Version:	0.12
-Release:	4
+Release:	5
 License:	BSD
 Group:		Development/Python
 Url:		http://docutils.sourceforge.net/
