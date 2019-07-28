@@ -14,6 +14,7 @@ BuildRequires:	emacs
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	python-setuptools
+BuildRequires:	python2-setuptools
 Requires:	python
 Suggests:	python-imaging
 
