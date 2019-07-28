@@ -12,6 +12,7 @@ Source0:	https://files.pythonhosted.org/packages/d4/12/6c3fd74a590c7327c98cae008
 BuildArch:	noarch
 BuildRequires:	emacs
 BuildRequires:	pkgconfig(python3)
+BuildRequires:	pkgconfig(python2)
 BuildRequires:	python-setuptools
 Requires:	python
 Suggests:	python-imaging
