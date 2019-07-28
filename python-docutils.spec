@@ -3,12 +3,12 @@
 
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
-Version:	0.14
-Release:	3
+Version:	0.15.1
+Release:	1
 License:	BSD
 Group:		Development/Python
 Url:		http://docutils.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/project/docutils/docutils/%{version}/docutils-%{version}.tar.gz
+Source0:	https://files.pythonhosted.org/packages/d4/12/6c3fd74a590c7327c98cae008c11d536029fa9cd7924de477e8cb8804186/docutils-0.15.1-post1.tar.gz
 BuildArch:	noarch
 BuildRequires:	emacs
 BuildRequires:	pkgconfig(python3)
