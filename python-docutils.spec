@@ -1,5 +1,6 @@
 %define module	docutils
 %bcond_without python2
+%bcond_with emacs
 
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
@@ -10,7 +11,9 @@ Group:		Development/Python
 Url:		http://docutils.sourceforge.net/
 Source0:	https://files.pythonhosted.org/packages/57/b1/b880503681ea1b64df05106fc7e3c4e3801736cf63deffc6fa7fc5404cf5/docutils-0.18.1.tar.gz
 BuildArch:	noarch
+%if %{with emacs}
 BuildRequires:	emacs
+%endif
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	python-setuptools
@@ -63,6 +66,7 @@ for file in %{buildroot}%{_bindir}/*.py; do
   mv $file %{buildroot}%{_bindir}/`basename $file .py`
 done
 
+%if %{with emacs}
 # Make emacs mode available:
 emacs -batch -f batch-byte-compile tools/editors/emacs/rst.el
 install -d -m 755 %{buildroot}%{_datadir}/emacs/site-lisp
@@ -76,14 +80,17 @@ EOF
 emacs -batch -f batch-byte-compile rst.el
 install -d -m 755 %{buildroot}%{_sysconfdir}/emacs/site-start.d
 install -m 644 rst.el* %{buildroot}%{_sysconfdir}/emacs/site-start.d/
+%endif
 
 %files
 %doc *.txt docs tools
 %{py_puresitedir}/docutils
 %{py_puresitedir}/*.egg-info
 %{_bindir}/*
+%if %{with emacs}
 %{_datadir}/emacs/site-lisp/*
 %{_sysconfdir}/emacs/site-start.d/*
+%endif
 
 %files -n python2-docutils
 %{py2_puresitedir}/docutils
