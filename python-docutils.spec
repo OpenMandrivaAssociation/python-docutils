@@ -1,5 +1,4 @@
 %define module	docutils
-%bcond_without python2
 %bcond_with emacs
 
 Summary:	Python Documentation Utilities
@@ -15,9 +14,7 @@ BuildArch:	noarch
 BuildRequires:	emacs
 %endif
 BuildRequires:	pkgconfig(python3)
-BuildRequires:	pkgconfig(python2)
 BuildRequires:	python-setuptools
-BuildRequires:	python2-setuptools
 Requires:	python
 Suggests:	python-imaging
 
@@ -39,31 +36,13 @@ Support for the following sources is planned:
   book.
 * And others as discovered.
 
-%package -n python2-docutils
-Summary: Documentation utilities for Python 2.x
-Requires: python2
-BuildRequires: pkgconfig(python2)
-Group:		Development/Python
-
-%description -n python2-docutils
-Documentation utilities for Python 2.x
-
 %prep
-%setup -qn %{module}-%{version}
-
-mkdir python2
-cp -a `ls |grep -v python2` python2
+%autosetup -p1 -n %{module}-%{version}
 
 %install
-cd python2
-python2 setup.py install --root=%{buildroot}
-# We only want the module -- the binaries come from python3
-rm -f %{buildroot}%{_bindir}/*.py
-
-cd ..
-%__python setup.py install --root=%{buildroot}
+python setup.py install --root=%{buildroot}
 for file in %{buildroot}%{_bindir}/*.py; do
-  mv $file %{buildroot}%{_bindir}/`basename $file .py`
+	mv $file %{buildroot}%{_bindir}/`basename $file .py`
 done
 
 %if %{with emacs}
@@ -91,7 +70,3 @@ install -m 644 rst.el* %{buildroot}%{_sysconfdir}/emacs/site-start.d/
 %{_datadir}/emacs/site-lisp/*
 %{_sysconfdir}/emacs/site-start.d/*
 %endif
-
-%files -n python2-docutils
-%{py2_puresitedir}/docutils
-%{py2_puresitedir}/*.egg-info
