@@ -3,12 +3,12 @@
 
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
-Version:	0.19
-Release:	2
+Version:	0.21.2
+Release:	1
 License:	BSD
 Group:		Development/Python
 Url:		http://docutils.sourceforge.net/
-Source0:	https://files.pythonhosted.org/packages/6b/5c/330ea8d383eb2ce973df34d1239b3b21e91cd8c865d21ff82902d952f91f/docutils-0.19.tar.gz
+Source0:	https://files.pythonhosted.org/packages/source/d/docutils/docutils-%{version}.tar.gz
 BuildArch:	noarch
 %if %{with emacs}
 BuildRequires:	emacs
@@ -37,13 +37,13 @@ Support for the following sources is planned:
 * And others as discovered.
 
 %prep
-%autosetup -p1 -n %{module}-%{version}
+%autosetup -p1 -n docutils-%{version}
+
+%build
+%py_build
 
 %install
-python setup.py install --root=%{buildroot}
-for file in %{buildroot}%{_bindir}/*.py; do
-	mv $file %{buildroot}%{_bindir}/`basename $file .py`
-done
+%py_install
 
 %if %{with emacs}
 # Make emacs mode available:
@@ -64,7 +64,7 @@ install -m 644 rst.el* %{buildroot}%{_sysconfdir}/emacs/site-start.d/
 %files
 %doc *.txt docs tools
 %{py_puresitedir}/docutils
-%{py_puresitedir}/*.egg-info
+%{py_puresitedir}/*.dist-info
 %{_bindir}/*
 %if %{with emacs}
 %{_datadir}/emacs/site-lisp/*
