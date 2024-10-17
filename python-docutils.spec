@@ -7,7 +7,7 @@ Version:	0.21.2
 Release:	1
 License:	BSD
 Group:		Development/Python
-Url:		http://docutils.sourceforge.net/
+Url:		https://docutils.sourceforge.net/
 Source0:	https://files.pythonhosted.org/packages/source/d/docutils/docutils-%{version}.tar.gz
 BuildArch:	noarch
 %if %{with emacs}
