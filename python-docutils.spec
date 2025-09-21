@@ -3,7 +3,7 @@
 
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
-Version:	0.21.2
+Version:	0.22.2
 Release:	1
 License:	BSD
 Group:		Development/Python
@@ -62,7 +62,7 @@ install -m 644 rst.el* %{buildroot}%{_sysconfdir}/emacs/site-start.d/
 %endif
 
 %files
-%doc *.txt docs tools
+%doc docs tools
 %{py_puresitedir}/docutils
 %{py_puresitedir}/*.dist-info
 %{_bindir}/*
