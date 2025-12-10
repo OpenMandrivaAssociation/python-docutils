@@ -15,6 +15,8 @@ BuildRequires:	emacs
 %endif
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	python-setuptools
+BuildRequires:  python-pip
+BuildRequires:  python-wheel
 Requires:	python
 Suggests:	python-imaging
 
