@@ -3,7 +3,7 @@
 
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
-Version:	0.22.2
+Version:	0.22.3
 Release:	1
 License:	BSD
 Group:		Development/Python
