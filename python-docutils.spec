@@ -3,7 +3,7 @@
 
 Summary:	Python Documentation Utilities
 Name:		python-%{module}
-Version:	0.22.3
+Version:	0.22.4
 Release:	1
 License:	BSD
 Group:		Development/Python
@@ -13,12 +13,11 @@ BuildArch:	noarch
 %if %{with emacs}
 BuildRequires:	emacs
 %endif
-BuildRequires:	pkgconfig(python3)
-BuildRequires:	python-setuptools
-BuildRequires:  python-pip
-BuildRequires:  python-wheel
-Requires:	python
-Suggests:	python-imaging
+BuildSystem:	python
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:  python%{pyver}dist(pip)
+BuildRequires:  python%{pyver}dist(wheel)
+Suggests:	python%{pyver}dist(imaging)
 
 %description
 The purpose of the Docutils project is to create a set of tools for
@@ -38,15 +37,7 @@ Support for the following sources is planned:
   book.
 * And others as discovered.
 
-%prep
-%autosetup -p1 -n docutils-%{version}
-
-%build
-%py_build
-
-%install
-%py_install
-
+%install -a
 %if %{with emacs}
 # Make emacs mode available:
 emacs -batch -f batch-byte-compile tools/editors/emacs/rst.el
