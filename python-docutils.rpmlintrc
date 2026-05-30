@@ -1,0 +1,4 @@
+# result of using fdupes
+addFilter("W: cross-directory-hard-link")
+# package has its own documentation
+addFilter("W: no-manual-page-for-binary")
