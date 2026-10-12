@@ -4,7 +4,7 @@
 Name:		python-docutils
 Summary:	Python Documentation Utilities
 Version:	0.23
-Release:	1
+Release:	2
 License:	CC-PDDC AND 0BSD AND BSD-3-Clause AND BSD-2-Clause AND GPL-2.0-or-later AND GPL-3.0-or-later
 Group:		Development/Python
 URL:		https://docutils.sourceforge.net
